@@ -1,0 +1,34 @@
+[
+  {
+    "userId":1569,
+    "userName":"vendedor1",
+    "followers": [
+      {
+        "userId":4698,
+        "userName":"usuario1"
+      },
+      {
+        "userId":1536,
+        "userName":"usuario2"
+      },
+      {
+        "userId":2236,
+        "userName":"usuario3"
+      }
+    ]
+  },
+  {
+    "userId":6932,
+    "userName":"vendedor2",
+    "followers": [
+
+    ]
+  },
+  {
+    "userId":6631,
+    "userName":"vendedor3",
+    "followers": [
+
+    ]
+  }
+]
