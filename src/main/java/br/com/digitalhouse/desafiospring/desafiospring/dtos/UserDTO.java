@@ -4,15 +4,15 @@ import java.util.List;
 
 public class UserDTO {
 
-    private int userId;
+    private Integer userId;
     private String userName;
     private List<SellerDTO> followed;
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
