@@ -2,6 +2,7 @@ package br.com.digitalhouse.desafiospring.desafiospring.services;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.SellerRepository;
+import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,8 @@ public class SellerService {
 
     public Seller buscar(Integer userId) {
         Optional<Seller> seller = sellerRepository.findById(userId);
-        return seller.orElse(null);
+        return seller.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + userId));
     }
 
 }

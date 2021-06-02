@@ -1,5 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class Seller implements Serializable {
     private Integer userId;
     private String userName;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
 
