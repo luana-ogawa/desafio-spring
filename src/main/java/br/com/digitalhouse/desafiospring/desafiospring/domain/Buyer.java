@@ -7,20 +7,24 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Seller implements Serializable {
+public class Buyer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String userName;
 
-    @ManyToMany(mappedBy = "followed")
-    private List<Buyer> followers = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "BUYER_SELLER",
+            joinColumns = @JoinColumn(name = "buyer_id"),
+            inverseJoinColumns = @JoinColumn(name = "seller_id")
+    )
+    private List<Seller> followed = new ArrayList<>();
 
-    public Seller() {
+    public Buyer(){
     }
 
-    public Seller(Integer userId, String userName) {
+    public Buyer(Integer userId, String userName) {
         this.userId = userId;
         this.userName = userName;
     }
@@ -41,20 +45,20 @@ public class Seller implements Serializable {
         this.userName = userName;
     }
 
-    public List<Buyer> getFollowers() {
-        return followers;
+    public List<Seller> getFollowed() {
+        return followed;
     }
 
-    public void setFollowers(List<Buyer> followers) {
-        this.followers = followers;
+    public void setFollowed(List<Seller> followed) {
+        this.followed = followed;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Seller vendedor = (Seller) o;
-        return Objects.equals(userId, vendedor.userId);
+        Buyer buyer = (Buyer) o;
+        return Objects.equals(userId, buyer.userId);
     }
 
     @Override
