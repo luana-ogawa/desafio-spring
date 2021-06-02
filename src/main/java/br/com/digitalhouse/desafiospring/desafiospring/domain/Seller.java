@@ -1,5 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -20,6 +22,8 @@ public class Seller implements Serializable {
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
 
+    @JsonBackReference
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "seller")
     private List<Newpost> newposts = new ArrayList<>();
 

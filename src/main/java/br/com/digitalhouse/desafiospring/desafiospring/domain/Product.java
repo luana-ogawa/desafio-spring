@@ -7,6 +7,7 @@ import java.util.Objects;
 @Entity
 public class Product implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer product_id;
@@ -16,22 +17,16 @@ public class Product implements Serializable {
     private String color;
     private String notes;
 
-    @OneToOne
-    @JoinColumn(name = "newpost_id")
-    @MapsId
-    private Newpost newpost;
-
     public Product(){
     }
 
-    public Product(Integer product_id, String productName, String type, String brand, String color, String notes, Newpost newpost) {
+    public Product(Integer product_id, String productName, String type, String brand, String color, String notes) {
         this.product_id = product_id;
         this.productName = productName;
         this.type = type;
         this.brand = brand;
         this.color = color;
         this.notes = notes;
-        this.newpost = newpost;
     }
 
     public Integer getProduct_id() {
@@ -80,14 +75,6 @@ public class Product implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public Newpost getNewpost() {
-        return newpost;
-    }
-
-    public void setNewpost(Newpost newpost) {
-        this.newpost = newpost;
     }
 
     @Override

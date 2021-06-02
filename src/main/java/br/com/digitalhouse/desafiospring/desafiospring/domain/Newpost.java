@@ -1,5 +1,8 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,20 +10,23 @@ import java.util.Objects;
 
 @Entity
 public class Newpost implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_post;
 
+    @JsonFormat(pattern="dd-MM-yyyy")
     private Date date;
     private Integer category;
     private double price;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "newpost")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "seller_id")
+    @JoinColumn(name = "userId")
     private Seller seller;
 
     public Newpost(){
