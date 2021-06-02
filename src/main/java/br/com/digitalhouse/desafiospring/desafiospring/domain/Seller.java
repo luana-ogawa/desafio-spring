@@ -20,6 +20,9 @@ public class Seller implements Serializable {
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "seller")
+    private List<Newpost> newposts = new ArrayList<>();
+
     public Seller() {
     }
 
@@ -50,6 +53,14 @@ public class Seller implements Serializable {
 
     public void setFollowers(List<Buyer> followers) {
         this.followers = followers;
+    }
+
+    public List<Newpost> getNewposts() {
+        return newposts;
+    }
+
+    public void setNewposts(List<Newpost> newposts) {
+        this.newposts = newposts;
     }
 
     @Override

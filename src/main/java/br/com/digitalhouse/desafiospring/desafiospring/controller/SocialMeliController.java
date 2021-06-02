@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class SocialMeliController {
 
     @Autowired
-    private SellerService service;
+    private SellerService sellerService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        Seller seller = service.buscar(id);
+    @RequestMapping(value = "/users/{UserID}/followers/list", method = RequestMethod.GET)
+    public ResponseEntity<?> followersList(@PathVariable Integer UserID) {
+        Seller seller = sellerService.findSeller(UserID);
         return ResponseEntity.ok().body(seller);
     }
 

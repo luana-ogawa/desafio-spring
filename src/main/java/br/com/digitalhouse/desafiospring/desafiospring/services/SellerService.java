@@ -14,7 +14,7 @@ public class SellerService {
     @Autowired
     private SellerRepository sellerRepository;
 
-    public Seller buscar(Integer userId) {
+    public Seller findSeller(Integer userId) {
         Optional<Seller> seller = sellerRepository.findById(userId);
         return seller.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + userId));
