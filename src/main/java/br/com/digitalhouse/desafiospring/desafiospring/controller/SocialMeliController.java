@@ -1,26 +1,22 @@
 package br.com.digitalhouse.desafiospring.desafiospring.controller;
 
-import br.com.digitalhouse.desafiospring.desafiospring.dtos.UserDTO;
-import br.com.digitalhouse.desafiospring.desafiospring.service.SocialMeli;
+import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
+import br.com.digitalhouse.desafiospring.desafiospring.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/social-meli")
+@RequestMapping(value = "/social-meli")
 public class SocialMeliController {
 
     @Autowired
-    SocialMeli socialMeli;
+    private SellerService service;
 
-    @PostMapping(path = "/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<UserDTO> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
-        return ResponseEntity.ok(socialMeli.follow(userId, userIdToFollow));
-    }
-
-    @GetMapping(path = "/users/{userId}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Integer userId) {
-        return ResponseEntity.ok(socialMeli.getUserName(userId));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable Integer id) {
+        Seller seller = service.buscar(id);
+        return ResponseEntity.ok().body(seller);
     }
 
 }
