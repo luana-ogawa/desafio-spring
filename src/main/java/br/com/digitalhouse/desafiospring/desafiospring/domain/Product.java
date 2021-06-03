@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Product implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer product_id;
@@ -17,7 +16,7 @@ public class Product implements Serializable {
     private String color;
     private String notes;
 
-    public Product(){
+    public Product() {
     }
 
     public Product(Integer product_id, String productName, String type, String brand, String color, String notes) {

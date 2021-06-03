@@ -1,7 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
+import br.com.digitalhouse.desafiospring.desafiospring.domain.enums.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,30 +15,30 @@ public class Newpost implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_post;
 
-    @JsonFormat(pattern="dd-MM-yyyy")
     private Date date;
     private Integer category;
     private double price;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    private Product product;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "userId")
     private Seller seller;
 
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    @MapsId
+    private Product detail;
+
     public Newpost(){
     }
 
-    public Newpost(Integer id_post, Date date, Integer category, double price, Product product, Seller seller) {
+    public Newpost(Integer id_post, Date date, Category category, double price, Seller seller, Product detail) {
         this.id_post = id_post;
         this.date = date;
-        this.category = category;
+        this.category = category.getCodigo();
         this.price = price;
-        this.product = product;
         this.seller = seller;
+        this.detail = detail;
     }
 
     public Integer getId_post() {
@@ -57,20 +57,12 @@ public class Newpost implements Serializable {
         this.date = date;
     }
 
-    public Product getProduct() {
-        return product;
+    public Category getCategory() {
+        return Category.toEnum(category);
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
+    public void setCategory(Category category) {
+        this.category = category.getCodigo();
     }
 
     public double getPrice() {
@@ -87,6 +79,14 @@ public class Newpost implements Serializable {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public Product getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Product detail) {
+        this.detail = detail;
     }
 
     @Override
