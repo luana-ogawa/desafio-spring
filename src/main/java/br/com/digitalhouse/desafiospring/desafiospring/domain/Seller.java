@@ -17,11 +17,9 @@ public class Seller implements Serializable {
     private Integer userId;
     private String userName;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
-
-    @JsonManagedReference
+    
     @OneToMany(mappedBy = "seller")
     private List<Newpost> newposts = new ArrayList<>();
 

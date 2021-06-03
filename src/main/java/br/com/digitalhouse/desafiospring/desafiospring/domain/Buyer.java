@@ -1,6 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class Buyer implements Serializable {
     private Integer userId;
     private String userName;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "BUYER_SELLER",
             joinColumns = @JoinColumn(name = "buyer_id"),

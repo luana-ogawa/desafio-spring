@@ -2,6 +2,8 @@ package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.enums.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,11 +17,12 @@ public class Newpost implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_post;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date;
     private Integer category;
     private double price;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "userId")
     private Seller seller;
