@@ -51,18 +51,18 @@ public class DesafioSpringApplication implements CommandLineRunner {
 		Newpost newpost1 = new Newpost(null, sdf.parse("03-06-2021"), Category.CADEIRAS, 1500.50, seller1, product1);
 		Newpost newpost2 = new Newpost(null, sdf.parse("04-06-2021"), Category.HEADSETS, 2800.69, seller1, product2);
 
-		seller1.getFollowers().addAll(Arrays.asList(buyer1, buyer2));
+		seller1.getFollowers().addAll(Arrays.asList(buyer1, buyer3, buyer2));
 		seller2.getFollowers().addAll(Arrays.asList(buyer1, buyer2));
 		seller3.getFollowers().addAll(Arrays.asList(buyer3));
 
 		seller1.getNewposts().addAll(Arrays.asList(newpost1, newpost2));
 
 		buyer1.getFollowed().addAll(Arrays.asList(seller1,seller2));
-		buyer2.getFollowed().addAll(Arrays.asList(seller2));
+		buyer2.getFollowed().addAll(Arrays.asList(seller2, seller1));
 		buyer3.getFollowed().addAll(Arrays.asList(seller1, seller3));
 
 		sellerRepository.saveAll(Arrays.asList(seller1, seller2, seller3));
-		buyerRepository.saveAll(Arrays.asList(buyer1, buyer2, buyer3));
+		buyerRepository.saveAll(Arrays.asList(buyer2, buyer1, buyer3));
 		newpostRepository.saveAll(Arrays.asList(newpost1, newpost2));
 		productRepository.saveAll(Arrays.asList(product1,product2));
 

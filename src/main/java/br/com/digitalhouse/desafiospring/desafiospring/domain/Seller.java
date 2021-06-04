@@ -31,6 +31,10 @@ public class Seller implements Serializable {
         this.userName = userName;
     }
 
+    public Integer getFollowers_count() {
+        return this.followers.size();
+    }
+
     public Integer getUserId() {
         return userId;
     }

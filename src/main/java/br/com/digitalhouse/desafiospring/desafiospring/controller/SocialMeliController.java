@@ -3,6 +3,7 @@ package br.com.digitalhouse.desafiospring.desafiospring.controller;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerCountFollowersDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.services.NewpostService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.ProductService;
@@ -30,6 +31,13 @@ public class SocialMeliController {
         Seller seller = sellerService.findSeller(userID);
         SellerDTO sellerDTO = new SellerDTO(seller);
         return ResponseEntity.ok().body(sellerDTO);
+    }
+
+    @RequestMapping(value = "/users/{userID}/followers/count", method = RequestMethod.GET)
+    public ResponseEntity<SellerCountFollowersDTO> followersCount(@PathVariable Integer userID) {
+        Seller seller = sellerService.findSeller(userID);
+        SellerCountFollowersDTO sellerCountFollowersDTO = new SellerCountFollowersDTO(seller);
+        return ResponseEntity.ok().body(sellerCountFollowersDTO);
     }
 
     //Product
