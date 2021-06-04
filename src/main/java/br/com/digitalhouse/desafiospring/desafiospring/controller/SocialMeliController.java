@@ -31,11 +31,21 @@ public class SocialMeliController {
     @Autowired
     private NewpostService newpostService;
 
+    //Follow
     @RequestMapping(value = "/users/{userId}/follow/{userIdToFollow}", method = RequestMethod.POST)
     public ResponseEntity<Void> followSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         Buyer buyer = buyerService.findBuyer(userId);
         Seller seller = sellerService.findSeller(userIdToFollow);
         buyer = buyerService.addFollowed(buyer, seller);
+        return ResponseEntity.ok().build();
+    }
+
+    //Unfollow
+    @RequestMapping(value = "/users/{userId}/unfollow/{userIdToUnfollow}", method = RequestMethod.POST)
+    public ResponseEntity<Void> unfollowSeller(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+        Buyer buyer = buyerService.findBuyer(userId);
+        Seller seller = sellerService.findSeller(userIdToUnfollow);
+        buyer = buyerService.removeFollowed(buyer, seller);
         return ResponseEntity.ok().build();
     }
 

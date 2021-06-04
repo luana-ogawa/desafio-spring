@@ -33,6 +33,11 @@ public class BuyerService {
         return buyerRepository.save(buyer);
     }
 
+    public Buyer removeFollowed(Buyer buyer, Seller seller) {
+        buyer.getFollowed().remove(seller);
+        return buyerRepository.save(buyer);
+    }
+
     public Page<Buyer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return buyerRepository.findAll(pageRequest);
