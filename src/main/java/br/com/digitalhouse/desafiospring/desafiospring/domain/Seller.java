@@ -19,7 +19,7 @@ public class Seller implements Serializable {
 
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "seller")
     private List<Newpost> newposts = new ArrayList<>();
 
