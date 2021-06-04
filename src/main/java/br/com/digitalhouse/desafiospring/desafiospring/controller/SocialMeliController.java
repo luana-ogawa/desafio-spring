@@ -31,6 +31,14 @@ public class SocialMeliController {
     @Autowired
     private NewpostService newpostService;
 
+    @RequestMapping(value = "/users/{userId}/follow/{userIdToFollow}", method = RequestMethod.POST)
+    public ResponseEntity<Void> followSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+        Buyer buyer = buyerService.findBuyer(userId);
+        Seller seller = sellerService.findSeller(userIdToFollow);
+        buyer = buyerService.addFollowed(buyer, seller);
+        return ResponseEntity.ok().build();
+    }
+
     //Followers
     @RequestMapping(value = "/users/{userID}/followers/list", method = RequestMethod.GET)
     public ResponseEntity<SellerDTO> followersList(@PathVariable Integer userID) {

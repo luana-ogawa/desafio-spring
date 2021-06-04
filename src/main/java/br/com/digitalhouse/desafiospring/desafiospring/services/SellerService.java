@@ -1,5 +1,6 @@
 package br.com.digitalhouse.desafiospring.desafiospring.services;
 
+import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.SellerRepository;
 import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.ObjectNotFoundException;
