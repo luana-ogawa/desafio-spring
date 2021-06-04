@@ -1,6 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,9 +18,11 @@ public class Seller implements Serializable {
     private Integer userId;
     private String userName;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "followed")
     private List<Buyer> followers = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "seller")
     private List<Newpost> newposts = new ArrayList<>();
 
@@ -31,6 +34,7 @@ public class Seller implements Serializable {
         this.userName = userName;
     }
 
+    @JsonIgnore
     public Integer getFollowers_count() {
         return this.followers.size();
     }

@@ -1,10 +1,13 @@
 package br.com.digitalhouse.desafiospring.desafiospring.controller;
 
+import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.BuyerDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerCountFollowersDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerDTO;
+import br.com.digitalhouse.desafiospring.desafiospring.services.BuyerService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.NewpostService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.ProductService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.SellerService;
@@ -22,10 +25,13 @@ public class SocialMeliController {
     @Autowired
     private SellerService sellerService;
     @Autowired
+    private BuyerService buyerService;
+    @Autowired
     private ProductService productService;
     @Autowired
     private NewpostService newpostService;
 
+    //Followers
     @RequestMapping(value = "/users/{userID}/followers/list", method = RequestMethod.GET)
     public ResponseEntity<SellerDTO> followersList(@PathVariable Integer userID) {
         Seller seller = sellerService.findSeller(userID);
@@ -38,6 +44,14 @@ public class SocialMeliController {
         Seller seller = sellerService.findSeller(userID);
         SellerCountFollowersDTO sellerCountFollowersDTO = new SellerCountFollowersDTO(seller);
         return ResponseEntity.ok().body(sellerCountFollowersDTO);
+    }
+
+    //Followed
+    @RequestMapping(value = "/users/{userID}/followed/list", method = RequestMethod.GET)
+    public ResponseEntity<BuyerDTO> followedList(@PathVariable Integer userID) {
+        Buyer buyer = buyerService.findBuyer(userID);
+        BuyerDTO buyerDTO = new BuyerDTO(buyer);
+        return ResponseEntity.ok().body(buyerDTO);
     }
 
     //Product
@@ -62,13 +76,13 @@ public class SocialMeliController {
     }
 
     //Newpost
-    @RequestMapping(value = "/newpost/{post_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/newpost/{post_id}", method = RequestMethod.GET)
     public ResponseEntity<Newpost> getNewpost(@PathVariable Integer post_id) {
         Newpost newpost = newpostService.findNewpost(post_id);
         return ResponseEntity.ok().body(newpost);
     }
 
-    @RequestMapping(value = "/newpost", method = RequestMethod.POST)
+    @RequestMapping(value = "/products/newpost", method = RequestMethod.POST)
     public ResponseEntity<Void> insertPost(@RequestBody Newpost newpost) {
         newpost = newpostService.insert(newpost);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -76,7 +90,7 @@ public class SocialMeliController {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/newpost/{post_id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/products/newpost/{post_id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deletePost(@PathVariable Integer post_id) {
         newpostService.delete(post_id);
         return ResponseEntity.noContent().build();
