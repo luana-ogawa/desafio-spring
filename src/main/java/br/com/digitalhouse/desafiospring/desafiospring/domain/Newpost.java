@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Newpost implements Serializable {
+public class Newpost implements Serializable, Comparable<Newpost>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,5 +103,10 @@ public class Newpost implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id_post);
+    }
+
+    @Override
+    public int compareTo(Newpost o) {
+        return getDate().compareTo(o.getDate());
     }
 }

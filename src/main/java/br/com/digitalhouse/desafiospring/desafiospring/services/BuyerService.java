@@ -78,6 +78,7 @@ public class BuyerService {
         Date finalCurrentDate = currentDate;
         List<Newpost> newpostList1 = newpostList.stream()
                 .filter(newpost -> newpost.getDate().after(finalCurrentDate))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
 
         PostListDTO postListDTO = new PostListDTO(buyerID, newpostList1);
