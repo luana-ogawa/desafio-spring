@@ -14,10 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,14 +46,41 @@ public class BuyerService {
         return buyerRepository.save(buyer);
     }
 
+//    public PostListDTO postList(Integer buyerID) {
+//        Buyer buyer = findBuyer(buyerID);
+//        List<Seller> sellerList = buyer.getFollowed();
+//        List<Newpost> newpostList = sellerList.stream()
+//                .map(seller -> seller.getNewposts())
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.toList());
+//        PostListDTO postListDTO = new PostListDTO(buyerID, newpostList);
+//        return postListDTO;
+//    }
+
+//    new Date()
+//    new Date(System.currentTimeMillis())
+//    Date.from(Instant.now())
     public PostListDTO postList(Integer buyerID) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        Date currentDate = Date.from(Instant.now());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, -15);
+        currentDate = calendar.getTime();
+
         Buyer buyer = findBuyer(buyerID);
         List<Seller> sellerList = buyer.getFollowed();
         List<Newpost> newpostList = sellerList.stream()
                 .map(seller -> seller.getNewposts())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        PostListDTO postListDTO = new PostListDTO(buyerID, newpostList);
+        Date finalCurrentDate = currentDate;
+        List<Newpost> newpostList1 = newpostList.stream()
+                .filter(newpost -> newpost.getDate().after(finalCurrentDate))
+                .collect(Collectors.toList());
+
+        PostListDTO postListDTO = new PostListDTO(buyerID, newpostList1);
         return postListDTO;
     }
 

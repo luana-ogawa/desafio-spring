@@ -46,16 +46,20 @@ public class DesafioSpringApplication implements CommandLineRunner {
 
 		Product product1 = new Product(null, "Cadeira Gamer", "Gamer", "Racer", "Red & Black", "Special Edition");
 		Product product2 = new Product(null, "Headset RGB", "Gamer", "Razer", "Green with RGB", "Sem bateria");
+		Product product3 = new Product(null, "Produto 3", "Gamer", "Razer", "Green with RGB", "Sem bateria");
+		Product product4 = new Product(null, "Produto 4", "Gamer", "Razer", "Green with RGB", "Sem bateria");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Newpost newpost1 = new Newpost(null, sdf.parse("03-06-2021"), Category.CADEIRAS, 1500.50, seller1, product1);
 		Newpost newpost2 = new Newpost(null, sdf.parse("04-06-2021"), Category.HEADSETS, 2800.69, seller1, product2);
+		Newpost newpost3 = new Newpost(null, sdf.parse("24-05-2021"), Category.HEADSETS, 2800.69, seller1, product3);
+		Newpost newpost4 = new Newpost(null, sdf.parse("23-05-2021"), Category.HEADSETS, 2800.69, seller1, product4);
 
 		seller1.getFollowers().addAll(Arrays.asList(buyer1, buyer3, buyer2));
 		seller2.getFollowers().addAll(Arrays.asList(buyer1, buyer2));
 		seller3.getFollowers().addAll(Arrays.asList(buyer3));
 
-		seller1.getNewposts().addAll(Arrays.asList(newpost1, newpost2));
+		seller1.getNewposts().addAll(Arrays.asList(newpost1, newpost2, newpost3, newpost4));
 
 		buyer1.getFollowed().addAll(Arrays.asList(seller1,seller2));
 		buyer2.getFollowed().addAll(Arrays.asList(seller2, seller1));
@@ -63,8 +67,8 @@ public class DesafioSpringApplication implements CommandLineRunner {
 
 		sellerRepository.saveAll(Arrays.asList(seller1, seller2, seller3));
 		buyerRepository.saveAll(Arrays.asList(buyer2, buyer1, buyer3));
-		newpostRepository.saveAll(Arrays.asList(newpost1, newpost2));
-		productRepository.saveAll(Arrays.asList(product1,product2));
+		newpostRepository.saveAll(Arrays.asList(newpost1, newpost2, newpost3, newpost4));
+		productRepository.saveAll(Arrays.asList(product1,product2, product3, product4));
 
 	}
 }
