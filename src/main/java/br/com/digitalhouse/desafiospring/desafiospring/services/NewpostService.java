@@ -3,7 +3,10 @@ package br.com.digitalhouse.desafiospring.desafiospring.services;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
+import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.NewpostRepository;
+import br.com.digitalhouse.desafiospring.desafiospring.repositories.SellerRepository;
 import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.DataIntegrityException;
 import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,26 @@ public class NewpostService {
 
     @Autowired
     private NewpostRepository newpostRepository;
+    @Autowired
+    private SellerRepository sellerRepository;
+    @Autowired
+    private SellerService sellerService;
 
     public Newpost insert(Newpost newpost) {
         newpost.setId_post(null);
+
+        if(!sellerService.userExists(newpost.getSeller().getUserId())) {
+            throw new RuntimeException("This user doesn't exists");
+        }
         return newpostRepository.save(newpost);
+
+//        sellerRepository.save(newpost.getSeller());
+
+//        SellerService sellerService = new SellerService();
+//        Seller seller = newpost.getSeller();
+//        seller.getNewposts().add(newpost);
+//
+//        sellerRepository.save(seller);
     }
 
     public Newpost findNewpost(Integer id_post) {

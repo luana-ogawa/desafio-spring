@@ -21,4 +21,9 @@ public class SellerService {
                 "Objeto não encontrado! Id: " + userId));
     }
 
+    public Boolean userExists(Integer userId) {
+        Optional<Seller> seller = sellerRepository.findById(userId);
+        return seller.isPresent();
+    }
+
 }

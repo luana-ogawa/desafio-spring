@@ -4,15 +4,13 @@ import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
-import br.com.digitalhouse.desafiospring.desafiospring.dto.BuyerDTO;
-import br.com.digitalhouse.desafiospring.desafiospring.dto.PostListDTO;
-import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerCountFollowersDTO;
-import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerDTO;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.*;
 import br.com.digitalhouse.desafiospring.desafiospring.services.BuyerService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.NewpostService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.ProductService;
 import br.com.digitalhouse.desafiospring.desafiospring.services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -113,12 +111,19 @@ public class SocialMeliController {
     }
 
     @RequestMapping(value = "/products/newpost", method = RequestMethod.POST)
-    public ResponseEntity<Void> insertPost(@RequestBody Newpost newpost) {
-        newpost = newpostService.insert(newpost);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(newpost.getId_post()).toUri();
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<Newpost> insertPost(@RequestBody NewpostDTO newpostDTO) {
+        Newpost newpost = new Newpost(newpostDTO);
+        Newpost response = newpostService.insert(newpost);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+//    @RequestMapping(value = "/products/newpost", method = RequestMethod.POST)
+//    public ResponseEntity<Void> insertPost(@RequestBody Newpost newpost) {
+//        newpost = newpostService.insert(newpost);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}").buildAndExpand(newpost.getId_post()).toUri();
+//        return ResponseEntity.created(uri).build();
+//    }
 
     @RequestMapping(value = "/products/newpost/{post_id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deletePost(@PathVariable Integer post_id) {

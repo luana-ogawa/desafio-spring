@@ -34,6 +34,10 @@ public class Seller implements Serializable, Comparable<Seller> {
         this.userName = userName;
     }
 
+    public Seller(Integer userId){
+        this.userId = userId;
+    }
+
     @JsonIgnore
     public Integer getFollowers_count() {
         return this.followers.size();

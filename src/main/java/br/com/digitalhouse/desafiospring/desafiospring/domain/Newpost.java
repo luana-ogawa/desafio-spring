@@ -1,6 +1,8 @@
 package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.enums.Category;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostDTO;
+import br.com.digitalhouse.desafiospring.desafiospring.services.SellerService;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,6 +44,15 @@ public class Newpost implements Serializable, Comparable<Newpost>{
         this.price = price;
         this.seller = seller;
         this.detail = detail;
+    }
+
+    public Newpost(NewpostDTO newpostDTO){
+        this.id_post = newpostDTO.getId_post();
+        this.date = newpostDTO.getDate();
+        this.category = newpostDTO.getCategory();
+        this.price = newpostDTO.getPrice();
+        this.seller = new Seller(newpostDTO.getUserId());
+        this.detail = newpostDTO.getDetail();
     }
 
     public Integer getId_post() {
