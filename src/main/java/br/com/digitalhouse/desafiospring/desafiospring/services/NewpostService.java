@@ -1,5 +1,6 @@
 package br.com.digitalhouse.desafiospring.desafiospring.services;
 
+import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.NewpostRepository;
@@ -7,6 +8,9 @@ import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.DataI
 import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -35,7 +39,11 @@ public class NewpostService {
         } catch(DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir um post que possui produtos");
         }
+    }
 
+    public Page<Newpost> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return newpostRepository.findAll(pageRequest);
     }
 
 }

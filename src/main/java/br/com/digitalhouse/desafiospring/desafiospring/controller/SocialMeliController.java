@@ -5,6 +5,7 @@ import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.BuyerDTO;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.PostListDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerCountFollowersDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.SellerDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.services.BuyerService;
@@ -112,6 +113,13 @@ public class SocialMeliController {
     public ResponseEntity<Void> deletePost(@PathVariable Integer post_id) {
         newpostService.delete(post_id);
         return ResponseEntity.noContent().build();
+    }
+
+    //Lista de publicacoes do vendedores que o comprador segue
+    @RequestMapping(value = "/products/followed/{userId}/list", method = RequestMethod.GET)
+    public ResponseEntity<PostListDTO> postList(@PathVariable Integer userId) {
+        PostListDTO postListDTO = buyerService.postList(userId);
+        return ResponseEntity.ok().body(postListDTO);
     }
 
 }
