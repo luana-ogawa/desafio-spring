@@ -46,21 +46,10 @@ public class BuyerService {
         return buyerRepository.save(buyer);
     }
 
-//    public PostListDTO postList(Integer buyerID) {
-//        Buyer buyer = findBuyer(buyerID);
-//        List<Seller> sellerList = buyer.getFollowed();
-//        List<Newpost> newpostList = sellerList.stream()
-//                .map(seller -> seller.getNewposts())
-//                .flatMap(Collection::stream)
-//                .collect(Collectors.toList());
-//        PostListDTO postListDTO = new PostListDTO(buyerID, newpostList);
-//        return postListDTO;
-//    }
-
 //    new Date()
 //    new Date(System.currentTimeMillis())
 //    Date.from(Instant.now())
-    public PostListDTO postList(Integer buyerID) {
+    public PostListDTO postList(Integer buyerID, String order) {
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 //        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date currentDate = Date.from(Instant.now());
@@ -76,30 +65,20 @@ public class BuyerService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         Date finalCurrentDate = currentDate;
-        List<Newpost> newpostList1 = newpostList.stream()
-                .filter(newpost -> newpost.getDate().after(finalCurrentDate))
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-
+        List<Newpost> newpostList1 = new ArrayList<>();
+        if(order.compareToIgnoreCase("date_asc") == 0) {
+            newpostList1 = newpostList.stream()
+                    .filter(newpost -> newpost.getDate().after(finalCurrentDate))
+                    .sorted(Comparator.naturalOrder())
+                    .collect(Collectors.toList());
+        } else if (order.compareToIgnoreCase("date_desc") == 0) {
+            newpostList1 = newpostList.stream()
+                    .filter(newpost -> newpost.getDate().after(finalCurrentDate))
+                    .sorted(Comparator.reverseOrder())
+                    .collect(Collectors.toList());
+        }
         PostListDTO postListDTO = new PostListDTO(buyerID, newpostList1);
         return postListDTO;
     }
-
-//    public PostListDTO postList(Integer buyerID) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        Period p = Period.between(LocalDate.now(), LocalDate.now().minusDays(14));
-//        Buyer buyer = findBuyer(buyerID);
-//        List<Seller> sellerList = buyer.getFollowed();
-//        List<Newpost> newpostList = sellerList.stream()
-//                .map(seller -> seller.getNewposts())
-//                .flatMap(Collection::stream)
-//                .collect(Collectors.toList());
-//        List<Newpost> newpostList1 = newpostList.stream()
-//                .filter(newpost -> newpost.getDate().after(date)
-//                .sorted(Comparator.reverseOrder())
-//                .collect(Collectors.toList());
-//        PostListDTO postListDTO = new PostListDTO(buyerID, newpostList);
-//        return postListDTO;
-//    }
 
 }

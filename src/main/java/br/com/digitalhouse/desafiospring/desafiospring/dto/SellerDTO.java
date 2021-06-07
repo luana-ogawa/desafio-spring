@@ -5,6 +5,8 @@ import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SellerDTO implements Serializable {
@@ -20,6 +22,18 @@ public class SellerDTO implements Serializable {
         userId = seller.getUserId();
         userName = seller.getUserName();
         followers = seller.getFollowers();
+    }
+
+    public SellerDTO(Seller seller, String order) {
+        userId = seller.getUserId();
+        userName = seller.getUserName();
+        followers = seller.getFollowers();
+
+        if(order.equals("name_asc")){
+            Collections.sort(followers);
+        } else if(order.equals("name_desc")){
+            Collections.sort(followers, Collections.reverseOrder());
+        }
     }
 
     public Integer getUserId() {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Buyer implements Serializable {
+public class Buyer implements Serializable, Comparable<Buyer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,4 +69,10 @@ public class Buyer implements Serializable {
     public int hashCode() {
         return Objects.hash(userId);
     }
+
+    @Override
+    public int compareTo(Buyer o) {
+        return getUserName().compareTo(o.getUserName());
+    }
+
 }

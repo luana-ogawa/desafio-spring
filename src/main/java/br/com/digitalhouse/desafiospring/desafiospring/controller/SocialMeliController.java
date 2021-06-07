@@ -52,9 +52,14 @@ public class SocialMeliController {
 
     //Followers
     @RequestMapping(value = "/users/{userID}/followers/list", method = RequestMethod.GET)
-    public ResponseEntity<SellerDTO> followersList(@PathVariable Integer userID) {
+    public ResponseEntity<SellerDTO> followersList(@PathVariable Integer userID, @RequestParam(value = "order", required = false) String order) {
         Seller seller = sellerService.findSeller(userID);
-        SellerDTO sellerDTO = new SellerDTO(seller);
+        SellerDTO sellerDTO;
+        if(order == null){
+            sellerDTO = new SellerDTO(seller);
+        } else {
+            sellerDTO = new SellerDTO(seller, order);
+        }
         return ResponseEntity.ok().body(sellerDTO);
     }
 
@@ -67,9 +72,15 @@ public class SocialMeliController {
 
     //Followed
     @RequestMapping(value = "/users/{userID}/followed/list", method = RequestMethod.GET)
-    public ResponseEntity<BuyerDTO> followedList(@PathVariable Integer userID) {
+    public ResponseEntity<BuyerDTO> followedList(@PathVariable Integer userID, @RequestParam(value = "order", required = false) String order) {
         Buyer buyer = buyerService.findBuyer(userID);
-        BuyerDTO buyerDTO = new BuyerDTO(buyer);
+        BuyerDTO buyerDTO;
+        if(order == null) {
+            buyerDTO = new BuyerDTO(buyer);
+        } else {
+            buyerDTO = new BuyerDTO(buyer, order);
+        }
+
         return ResponseEntity.ok().body(buyerDTO);
     }
 
@@ -117,8 +128,13 @@ public class SocialMeliController {
 
     //Lista de publicacoes do vendedores que o comprador segue
     @RequestMapping(value = "/products/followed/{userId}/list", method = RequestMethod.GET)
-    public ResponseEntity<PostListDTO> postList(@PathVariable Integer userId) {
-        PostListDTO postListDTO = buyerService.postList(userId);
+    public ResponseEntity<PostListDTO> postList(@PathVariable Integer userId, @RequestParam(value = "order", required = false) String order) {
+        PostListDTO postListDTO;
+        if(order == null) {
+            postListDTO = buyerService.postList(userId, "date_desc");
+        } else {
+            postListDTO = buyerService.postList(userId, order);
+        }
         return ResponseEntity.ok().body(postListDTO);
     }
 
