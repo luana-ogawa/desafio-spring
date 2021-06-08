@@ -5,6 +5,8 @@
 1. Sellers e Buyers foram definidos como classes separadas, logo um Seller pode ter o mesmo userId de um Buyer
 2. IDs de usuários são gerados automaticamente, portanto o payload para os requisitos US 0005 e US 0010 para criação de um novo post e post promocional não necessitam informação do id_post e nem do product_id, por exemplo:
 
+#### US 0005
+
 ```
 {
     "userId": 2,
@@ -21,6 +23,7 @@
 }
 ```
 
+#### US 0010
 ```
 {
     "userId": 3,
