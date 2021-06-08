@@ -70,4 +70,5 @@
     "Cadeira Escritorio"(Post de Rodrigo) ("08-06-2021") - item promocional
 ```  
 
+
 4. Se a data atual passar de duas semanas da data de cadastro do produto, este não aparecerá no requisito US 0006
