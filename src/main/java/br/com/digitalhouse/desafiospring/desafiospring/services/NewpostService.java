@@ -32,7 +32,7 @@ public class NewpostService {
         newpost.setId_post(null);
 
         if(!sellerService.userExists(newpost.getSeller().getUserId())) {
-            throw new RuntimeException("Usuário não existe");
+            throw new ObjectNotFoundException("Usuário não existe");
         }
         return newpostRepository.save(newpost);
     }
@@ -42,7 +42,7 @@ public class NewpostService {
         newpost.setId_post(null);
 
         if(!sellerService.userExists(newpost.getSeller().getUserId())) {
-            throw new RuntimeException("Usuário não existe");
+            throw new ObjectNotFoundException("Usuário não existe");
         }
         return newpostRepository.save(newpost);
     }
