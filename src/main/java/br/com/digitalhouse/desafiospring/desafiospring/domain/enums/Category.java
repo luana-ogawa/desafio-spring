@@ -4,7 +4,8 @@ public enum Category {
 
     CADEIRAS(100),
     HEADSETS(120),
-    TECLADOS(58);
+    TECLADOS(58),
+    MOUSES(32);
 
     private int codigo;
 
