@@ -37,22 +37,22 @@ public class DesafioSpringApplication implements CommandLineRunner {
 		Seller seller2 = new Seller(null, "Vendedor Alessandra");
 		Seller seller3 = new Seller(null, "Vendedor Rodrigo");
 
-		Buyer buyer1 = new Buyer(null, "Usuario Sandra");
-		Buyer buyer2 = new Buyer(null, "Usuario Vitoria");
-		Buyer buyer3 = new Buyer(null, "Usuario Armando");
+		Buyer buyer1 = new Buyer(null, "Comprador Sandra");
+		Buyer buyer2 = new Buyer(null, "Comprador Vitoria");
+		Buyer buyer3 = new Buyer(null, "Comprador Armando");
 
 		Product product1 = new Product(null, "Cadeira Gamer", "Gamer", "Razer", "Red & Black", "Special Edition");
 		Product product2 = new Product(null, "Headset RGB", "Gamer", "Razer", "Green with RGB", "Sem bateria");
 		Product product3 = new Product(null, "Mouse Optico", "Gamer", "Razer", "Black", "Sem bateria");
 		Product product4 = new Product(null, "Teclado Mecanico", "Gamer", "Razer", "Colourful", "USB");
-		Product product5 = new Product(null, "Teste", "Teste", "Teste", "Teste", "Teste");
+		Product product5 = new Product(null, "Cadeira Escritorio", "Escritorio", "Comfort", "White", "Leather");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Newpost newpost1 = new Newpost(null, sdf.parse("03-06-2021"), Category.CADEIRAS, 1500.50, seller1, product1);
 		Newpost newpost2 = new Newpost(null, sdf.parse("04-06-2021"), Category.HEADSETS, 2800.69, seller1, product2);
 		Newpost newpost3 = new Newpost(null, sdf.parse("25-05-2021"), Category.MOUSES, 375.90, seller1, product3);
 		Newpost newpost4 = new Newpost(null, sdf.parse("01-03-2019"), Category.TECLADOS, 1000.00, seller2, product4);
-		Newpost newpost5 = new NewpostPromo(null, sdf.parse("08-06-2021"), Category.MOUSES, 100.00, seller3, product5, true, 0.10);
+		Newpost newpost5 = new NewpostPromo(null, sdf.parse("08-06-2021"), Category.CADEIRAS, 5000.00, seller3, product5, true, 0.10);
 
 		seller1.getFollowers().addAll(Arrays.asList(buyer1, buyer2, buyer3));
 		seller2.getFollowers().addAll(Arrays.asList(buyer1, buyer2));
