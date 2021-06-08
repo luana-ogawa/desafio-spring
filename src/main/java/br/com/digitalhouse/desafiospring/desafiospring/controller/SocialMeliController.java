@@ -102,6 +102,13 @@ public class SocialMeliController {
         return ResponseEntity.ok().build();
     }
 
+    // US 0010- New post promo
+    @RequestMapping(value = "/products/newpromopost", method = RequestMethod.POST)
+    public ResponseEntity<Newpost> insertPostPromo(@RequestBody NewpostPromoDTO newpostPromoDTO) {
+        Newpost response = newpostService.insertPromo(newpostPromoDTO);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
     //Product
     @RequestMapping(value = "/product/{productID}", method = RequestMethod.GET)
     public ResponseEntity<Product> getProduct(@PathVariable Integer productID) {

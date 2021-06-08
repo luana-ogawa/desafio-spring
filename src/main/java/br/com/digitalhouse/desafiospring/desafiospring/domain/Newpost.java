@@ -2,8 +2,6 @@ package br.com.digitalhouse.desafiospring.desafiospring.domain;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.enums.Category;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostDTO;
-import br.com.digitalhouse.desafiospring.desafiospring.services.SellerService;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,6 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Newpost implements Serializable, Comparable<Newpost>{
 
     @Id

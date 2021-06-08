@@ -1,7 +1,9 @@
 package br.com.digitalhouse.desafiospring.desafiospring.services;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
+import br.com.digitalhouse.desafiospring.desafiospring.domain.NewpostPromo;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostDTO;
+import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostPromoDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.NewpostRepository;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.SellerRepository;
 import br.com.digitalhouse.desafiospring.desafiospring.services.exceptions.DataIntegrityException;
@@ -30,7 +32,17 @@ public class NewpostService {
         newpost.setId_post(null);
 
         if(!sellerService.userExists(newpost.getSeller().getUserId())) {
-            throw new RuntimeException("This user doesn't exists");
+            throw new RuntimeException("Usuário não existe");
+        }
+        return newpostRepository.save(newpost);
+    }
+
+    public Newpost insertPromo(NewpostPromoDTO newpostPromoDTO) {
+        Newpost newpost = new NewpostPromo(newpostPromoDTO);
+        newpost.setId_post(null);
+
+        if(!sellerService.userExists(newpost.getSeller().getUserId())) {
+            throw new RuntimeException("Usuário não existe");
         }
         return newpostRepository.save(newpost);
     }
