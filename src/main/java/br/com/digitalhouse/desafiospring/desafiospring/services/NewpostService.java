@@ -1,9 +1,6 @@
 package br.com.digitalhouse.desafiospring.desafiospring.services;
 
-import br.com.digitalhouse.desafiospring.desafiospring.domain.Buyer;
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Newpost;
-import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
-import br.com.digitalhouse.desafiospring.desafiospring.domain.Seller;
 import br.com.digitalhouse.desafiospring.desafiospring.dto.NewpostDTO;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.NewpostRepository;
 import br.com.digitalhouse.desafiospring.desafiospring.repositories.SellerRepository;
@@ -28,21 +25,14 @@ public class NewpostService {
     @Autowired
     private SellerService sellerService;
 
-    public Newpost insert(Newpost newpost) {
+    public Newpost insert(NewpostDTO newpostDTO) {
+        Newpost newpost = new Newpost(newpostDTO);
         newpost.setId_post(null);
 
         if(!sellerService.userExists(newpost.getSeller().getUserId())) {
             throw new RuntimeException("This user doesn't exists");
         }
         return newpostRepository.save(newpost);
-
-//        sellerRepository.save(newpost.getSeller());
-
-//        SellerService sellerService = new SellerService();
-//        Seller seller = newpost.getSeller();
-//        seller.getNewposts().add(newpost);
-//
-//        sellerRepository.save(seller);
     }
 
     public Newpost findNewpost(Integer id_post) {

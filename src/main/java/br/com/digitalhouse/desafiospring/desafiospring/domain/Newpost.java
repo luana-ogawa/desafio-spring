@@ -49,7 +49,7 @@ public class Newpost implements Serializable, Comparable<Newpost>{
     public Newpost(NewpostDTO newpostDTO){
         this.id_post = newpostDTO.getId_post();
         this.date = newpostDTO.getDate();
-        this.category = newpostDTO.getCategory();
+        this.category = newpostDTO.getCategory().getCodigo();
         this.price = newpostDTO.getPrice();
         this.seller = new Seller(newpostDTO.getUserId());
         this.detail = newpostDTO.getDetail();

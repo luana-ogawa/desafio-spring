@@ -1,6 +1,7 @@
 package br.com.digitalhouse.desafiospring.desafiospring.dto;
 
 import br.com.digitalhouse.desafiospring.desafiospring.domain.Product;
+import br.com.digitalhouse.desafiospring.desafiospring.domain.enums.Category;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class NewpostDTO {
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date;
-    private Integer category;
+    private Category category;
     private double price;
     private Product detail;
 
@@ -43,11 +44,11 @@ public class NewpostDTO {
         this.date = date;
     }
 
-    public Integer getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
