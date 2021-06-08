@@ -42,8 +42,16 @@
 }
 ```
 
+3. Apenas as seguintes categorias são permitidas para cadastro de produtos:
 
-3. Já foram carregadas algumas informações que podem ser usadas para teste:
+```
+CADEIRAS
+HEADSETS
+TECLADOS
+MOUSES
+```
+
+4. Já foram carregadas algumas informações que podem ser usadas para teste:
 
 #### Vendedores
 
@@ -71,4 +79,4 @@
 ```  
 
 
-4. Se a data atual passar de duas semanas da data de cadastro do produto, este não aparecerá no requisito US 0006
+5. Se a data atual passar de duas semanas da data de cadastro do produto, este não aparecerá no requisito US 0006
