@@ -109,6 +109,14 @@ public class SocialMeliController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    //    US 0011 - count promo products
+    @RequestMapping(value = "/products/{userId}/countPromo", method = RequestMethod.GET)
+    public ResponseEntity<CountPromoDTO> promoCount(@PathVariable Integer userId) {
+        Seller seller = sellerService.findSeller(userId);
+        CountPromoDTO countPromoDTO = new CountPromoDTO(seller);
+        return ResponseEntity.ok().body(countPromoDTO);
+    }
+
     //Product
     @RequestMapping(value = "/product/{productID}", method = RequestMethod.GET)
     public ResponseEntity<Product> getProduct(@PathVariable Integer productID) {
