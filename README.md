@@ -45,11 +45,15 @@
 
 3. Já foram carregadas algumas informações que podem ser usadas para teste:
 
+#### Vendedores
+
 ```
     "Vendedor Katia" - userId 1
     "Vendedor Alessandra" - userId 2
     "Vendedor Rodrigo" - userId 3
 ```
+
+#### Compradores
 
 ```
     "Comprador Vitoria" - userId 1 (Segue Katia e Alessandra)
@@ -57,6 +61,7 @@
     "Comprador Armando" - userId 3 (Segue Katia e Rodrigo)
 ```
 
+#### Posts
 ```
     "Cadeira Gamer" (Post de Katia) ("03-06-2021")
     "Headset RGB" (Post de Katia) ("04-06-2021")
