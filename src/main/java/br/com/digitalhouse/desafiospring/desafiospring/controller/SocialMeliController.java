@@ -117,6 +117,14 @@ public class SocialMeliController {
         return ResponseEntity.ok().body(countPromoDTO);
     }
 
+    //US 0012 - Lista de produtos de um vendedor especifico
+    @RequestMapping(value = "/products/{userId}/list", method = RequestMethod.GET)
+    public ResponseEntity<PromoPostListDTO> promoPostList(@PathVariable Integer userId) {
+        Seller seller = sellerService.findSeller(userId);
+        PromoPostListDTO promoPostListDTO = new PromoPostListDTO(seller);
+        return ResponseEntity.ok().body(promoPostListDTO);
+    }
+
     //Product
     @RequestMapping(value = "/product/{productID}", method = RequestMethod.GET)
     public ResponseEntity<Product> getProduct(@PathVariable Integer productID) {
