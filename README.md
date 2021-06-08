@@ -52,9 +52,9 @@
 ```
 
 ```
-    "Usuario Vitoria" - userId 1 (Segue Katia e Alessandra)
-    "Usuario Sandra" - userId 2 (Segue Katia e Alessandra)
-    "Usuario Armando" - userId 3 (Segue Katia e Rodrigo)
+    "Comprador Vitoria" - userId 1 (Segue Katia e Alessandra)
+    "Comprador Sandra" - userId 2 (Segue Katia e Alessandra)
+    "Comprador Armando" - userId 3 (Segue Katia e Rodrigo)
 ```
 
 ```
